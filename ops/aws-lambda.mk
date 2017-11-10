@@ -1,4 +1,4 @@
-include common.mk
+include ops/common.mk
 
 TEMP_DIR=$(shell pwd)/tmp
 
