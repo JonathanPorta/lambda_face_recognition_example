@@ -1,5 +1,3 @@
-TEMP_DIR=$(shell pwd)/tmp
-
 aws_lambda_package::
 	zip -r9 ${APP_NAME}.zip .
 

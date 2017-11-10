@@ -48,32 +48,32 @@ check_env(){
     exit 1
   fi
 
-	BEFORE_REMOVE_SCRIPT_PATH="./before_remove.sh"
-  AFTER_INSTALL_SCRIPT_PATH="./after_install.sh"
-  AFTER_REMOVE_SCRIPT_PATH="./after_remove.sh"
-	AFTER_UPGRADE_SCRIPT_PATH="./after_upgrade.sh"
+	BEFORE_REMOVE_SCRIPT_PATH="before_remove.sh"
+  AFTER_INSTALL_SCRIPT_PATH="after_install.sh"
+  AFTER_REMOVE_SCRIPT_PATH="after_remove.sh"
+	AFTER_UPGRADE_SCRIPT_PATH="after_upgrade.sh"
 
 	if [ ! -f $BEFORE_REMOVE_SCRIPT_PATH ]; then
     echo_cyan "There doesn't appear to be an 'before_remove' script at "$BEFORE_REMOVE_SCRIPT_PATH". Creating a noop placeholder..."
-    touch $BEFORE_REMOVE_SCRIPT_PATH
+    cp ./templates/rpm/$BEFORE_REMOVE_SCRIPT_PATH $BEFORE_REMOVE_SCRIPT_PATH
     echo_cyan "Done."
   fi
 
   if [ ! -f $AFTER_INSTALL_SCRIPT_PATH ]; then
     echo_cyan "There doesn't appear to be an 'after_install' script at '$AFTER_INSTALL_SCRIPT_PATH'. Creating a noop placeholder..."
-    touch $AFTER_INSTALL_SCRIPT_PATH
+    cp ./templates/rpm/$AFTER_INSTALL_SCRIPT_PATH $AFTER_INSTALL_SCRIPT_PATH
     echo_cyan "Done."
   fi
 
   if [ ! -f $AFTER_REMOVE_SCRIPT_PATH ]; then
     echo_cyan "There doesn't appear to be an 'after_remove' script at "$AFTER_REMOVE_SCRIPT_PATH". Creating a noop placeholder..."
-    touch $AFTER_REMOVE_SCRIPT_PATH
+    cp ./templates/rpm/$AFTER_REMOVE_SCRIPT_PATH $AFTER_REMOVE_SCRIPT_PATH
     echo_cyan "Done."
   fi
 
 	if [ ! -f $AFTER_UPGRADE_SCRIPT_PATH ]; then
     echo_cyan "There doesn't appear to be an 'after_upgrade' script at "$AFTER_UPGRADE_SCRIPT_PATH". Creating a noop placeholder..."
-    touch $AFTER_UPGRADE_SCRIPT_PATH
+    cp ./templates/rpm/$AFTER_UPGRADE_SCRIPT_PATH $AFTER_UPGRADE_SCRIPT_PATH
     echo_cyan "Done."
   fi
 
