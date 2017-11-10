@@ -1,6 +1,6 @@
 include ops/aws-lambda.mk
 
-#APP_NAME=lambda_dlib_opencv_example - check ./.env
+#APP_NAME=lambda-dlib-opencv-example - check ./.env
 
 deps:: clean
 	./ops/gh.sh latest aeddi/aws-lambda-python-opencv
