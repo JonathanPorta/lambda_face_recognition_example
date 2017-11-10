@@ -64,23 +64,27 @@ resource "aws_lambda_function" "app_function" {
   # }
 }
 
-# Setup an event to trigger the lambafunction
-resource "aws_cloudwatch_event_rule" "app_event_rule" {
-  name                = "${var.app_name}_event_rule"
-  description         = "Invoke ${aws_lambda_function.app_function.arn} every 5 mins"
-  schedule_expression = "rate(5 minutes)"
-}
+#
+# Configuration for triggering a function to run on a schedule.
+#
+# # Setup an event to trigger the lambafunction
+# resource "aws_cloudwatch_event_rule" "app_event_rule" {
+#   name                = "${var.app_name}_event_rule"
+#   description         = "Invoke ${aws_lambda_function.app_function.arn} every 5 mins"
+#   schedule_expression = "rate(5 minutes)"
+# }
+#
+# # Set the lambda's ARN as the target of the event
+# resource "aws_cloudwatch_event_target" "app_target" {
+#   rule = "${aws_cloudwatch_event_rule.app_event_rule.id}"
+#   arn  = "${aws_lambda_function.app_function.arn}"
+# }
+#
+# resource "aws_lambda_permission" "app_function_allow_cloud_watch" {
+#   statement_id  = "AllowExecutionFromCloudWatch"
+#   action        = "lambda:InvokeFunction"
+#   function_name = "${aws_lambda_function.app_function.function_name}"
+#   principal     = "events.amazonaws.com"
+#   source_arn    = "${aws_cloudwatch_event_rule.app_event_rule.arn}"
+# }
 
-# Set the lambda's ARN as the target of the event
-resource "aws_cloudwatch_event_target" "app_target" {
-  rule = "${aws_cloudwatch_event_rule.app_event_rule.id}"
-  arn  = "${aws_lambda_function.app_function.arn}"
-}
-
-resource "aws_lambda_permission" "app_function_allow_cloud_watch" {
-  statement_id  = "AllowExecutionFromCloudWatch"
-  action        = "lambda:InvokeFunction"
-  function_name = "${aws_lambda_function.app_function.function_name}"
-  principal     = "events.amazonaws.com"
-  source_arn    = "${aws_cloudwatch_event_rule.app_event_rule.arn}"
-}

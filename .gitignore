@@ -3,3 +3,5 @@ tmp
 .env
 .terraform
 __pycache__
+*.tfstate
+*.tfstate.backup

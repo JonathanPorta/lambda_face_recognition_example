@@ -15,3 +15,7 @@ deploy: aws_lambda_deploy
 clean::
 	-rm -rf ./aws-lambda-python-opencv-prebuilt ./cv2 ./numpy
 	-rm aws-lambda-python-opencv-prebuilt.zip lambda_function.py ${APP_NAME}.zip
+
+# 
+#
+# terraform import aws_lambda_permission.app_function_allow_cloud_watch AllowExecutionFromCloudWatch

@@ -1,6 +1,8 @@
 TERRAFORM_VERSION=0.10.7
 TEMP_DIR=$(shell pwd)/tmp
 
+include ci.mk
+
 common_terraform_binary:
 	curl https://releases.hashicorp.com/terraform/0.10.7/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o /tmp/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 	unzip -o /tmp/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d ${TEMP_DIR}/
