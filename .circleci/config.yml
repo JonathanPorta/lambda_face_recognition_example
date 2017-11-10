@@ -13,4 +13,4 @@ jobs:
           command: make test
       - run:
           name: Package and Cut Release
-          command: make release
+          command: make deploy
