@@ -115,7 +115,7 @@ download_asset(){
 
 	echo_green "Found latest Release asset at '${RELEASE_ASSET_URL}'."
 	echo_green "Downloading '${RELEASE_ASSET_URL}'..."
-	curl -O ${RELEASE_ASSET_URL}
+	curl -LO ${RELEASE_ASSET_URL}
 	echo_green "Done."
 }
 
