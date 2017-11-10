@@ -13,3 +13,6 @@ deploy: aws_lambda_deploy
 clean::
 	-rm -rf ./aws-lambda-python-opencv-prebuilt ./cv2 ./numpy
 	-rm aws-lambda-python-opencv-prebuilt.zip lambda_function.py ${APP_NAME}.zip
+
+test:
+	@echo 'TODO: Actually test something, dude.'
