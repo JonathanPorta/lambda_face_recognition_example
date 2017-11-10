@@ -1,6 +1,7 @@
 TERRAFORM_VERSION=0.10.7
 TEMP_DIR=$(shell pwd)/tmp
 
+include ops/aws-lambda.mk
 include ops/ci.mk
 
 common_terraform_binary:

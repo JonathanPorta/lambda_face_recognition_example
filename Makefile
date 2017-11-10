@@ -1,4 +1,4 @@
-include ops/aws-lambda.mk
+include ops/common.mk
 
 #APP_NAME=lambda-dlib-opencv-example - check ./.env
 
