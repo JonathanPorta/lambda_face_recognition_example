@@ -6,7 +6,7 @@ import argparse
 
 def hititorquitit(path):
     if path.endswith('.py') and os.path.isfile(path):
-        print(path)
+        #print(path)
         return True
     return False
 
@@ -15,11 +15,11 @@ def walkitoutboy(path, output_path, starting_path):
     target = os.scandir(path)
     for entry in target:
         if os.path.isdir(entry):
-            result+=walkitoutboy(entry, output_path, starting_path)
+            walkitoutboy(entry, output_path, starting_path)
         elif not hititorquitit(entry.path):
             continue
         else:
-            result+=minifile(entry.path, output_path, starting_path)
+            minifile(entry.path, output_path, starting_path)
     return result
 
 
@@ -40,7 +40,10 @@ def minifile(path, output_path, starting_path):
     #     "(https://github.com/liftoff/pyminifier)\n")
     # Either save the result to the output file or print it to stdout
 
-    scribedat(result, os.path.join(output_path))
+    relpath = os.path.join(output_path, os.path.relpath(path, starting_path))
+    # print("Compressed '{}' and planning to write to '{}'".format(path, relpath))
+    print("'{}' 8=====D~~~ '{}'".format(path, relpath))
+    scribedat(result, relpath)
     # if options.outfile:
     #     f = io.open(options.outfile, 'w', encoding='utf-8')
     #     f.write(result)
@@ -51,10 +54,14 @@ def minifile(path, output_path, starting_path):
     #         "{path} ({filesize}) reduced to {new_filesize} bytes "
     #         "({percent_saved}% of original size)".format(**locals())))
 
-def scribedat(data):
-    fp = open(output_path,'w')
-    fp.write(data)
-    fp.close()
+def scribedat(data, output_path):
+    if os.path.exists(output_path):
+        print("{} already exists! Aborting...".format(output_path))
+        raise Exception("{} already exists! Aborting...".format(output_path))
+    else:
+        fp = open(output_path,'w')
+        fp.write(data)
+        fp.close()
 
 parser = argparse.ArgumentParser()
 
@@ -72,16 +79,14 @@ args = parser.parse_args()
 target_path = args.source_path
 output_path = args.output_path
 
-starting_path = os.basepath(target_path)
+starting_path = os.path.dirname(target_path)
 print("Looking to start at '{}' with a base path of '{}'. All results will be written to '{}'".format(target_path, starting_path, output_path))
 
 if os.path.isdir(target_path):
     print("'{}' appears to be a directory".format(target_path))
-    data = walkitoutboy(target_path, output_path, starting_path)
+    walkitoutboy(target_path, output_path, starting_path)
 else:
     print(os.path.islink(target_path))
     print("'{}' appears to be a file".format(target_path))
     if hititorquitit(target_path):
-        data = minifile(target_path, output_path, starting_path)
-
-scribedat(data)
+        minifile(target_path, output_path, starting_path)
