@@ -49,9 +49,23 @@ resource "aws_iam_role_policy" "app_role_policy" {
 EOF
 }
 
+# Create bucket to upload source
+resource "aws_s3_bucket" "app_bucket" {
+  bucket = "${var.app_name}_function"
+}
+
+# Upload source code to S3 bucket
+resource "aws_s3_bucket_object" "app_source" {
+  bucket = "${aws_s3_bucket.app_bucket.bucket}"
+  key    = "source"
+  source = "${var.app_name}.zip"
+  etag   = "${md5(file("${var.app_name}.zip"))}"
+}
+
 # AWS Lambda function
 resource "aws_lambda_function" "app_function" {
-  filename         = "${var.app_name}.zip"
+  s3_bucket        = "${aws_s3_bucket_object.app_source.bucket}"
+  s3_key           = "${aws_s3_bucket_object.app_source.key}"
   function_name    = "${var.app_name}_function"
   role             = "${aws_iam_role.app_role.arn}"
   handler          = "${var.function_handler}"
