@@ -71,6 +71,7 @@ resource "aws_lambda_function" "app_function" {
   handler          = "${var.function_handler}"
   runtime          = "${var.function_runtime}"
   timeout          = 300
+  memory_size      = 1536
   source_code_hash = "${base64sha256(file("${var.app_name}.zip"))}"
 
   # environment {
