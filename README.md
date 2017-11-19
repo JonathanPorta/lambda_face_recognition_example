@@ -37,3 +37,16 @@ python3 -m compileall .
 rsync -a --include='*.pyc' --include='*/' --exclude='*' ./build/ ./buildpyc/
 
 find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf  
+
+# builddir
+export BOOST_INCLUDEDIR=$(pwd)/build/boost_1_65_1/
+export BOOST_ROOT=$(pwd)/build/boost_1_65_1/
+export BOOST_LIBRARYDIR=$(pwd)/build/boost_1_65_1/stage/lib/
+export LD_LIBRARY_PATH=$(pwd)/build/boost_1_65_1/stage/lib/:$LD_LIBRARY_PATH
+
+
+# zippered
+export BOOST_INCLUDEDIR=$(pwd)/zippered/build/boost_1_65_1/
+export BOOST_ROOT=$(pwd)/zippered/build/boost_1_65_1/
+export BOOST_LIBRARYDIR=$(pwd)/zippered/build/boost_1_65_1/stage/lib/
+export LD_LIBRARY_PATH=$(pwd)/zippered/build/boost_1_65_1/stage/lib/:$LD_LIBRARY_PATH
