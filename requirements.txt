@@ -3,7 +3,7 @@ chardet==3.0.4
 idna==2.6
 lambda-face-recognition-prebuilt==0.0.14
 pkginfo==1.4.1
-requests==2.18.4
+requests==2.33.0
 requests-toolbelt==0.8.0
 safe-extractor==0.0.8
 semver==2.7.9
