@@ -1,6 +1,6 @@
 certifi==2022.12.7
 chardet==3.0.4
-idna==2.6
+idna==3.15
 lambda-face-recognition-prebuilt==0.0.14
 pkginfo==1.4.1
 requests==2.18.4
